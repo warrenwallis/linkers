@@ -18,19 +18,16 @@
 
 // Shortcuts to DOM Elements.
 var messageForm = document.getElementById('message-form');
-var messageInput = document.getElementById('new-post-message');
-var titleInput = document.getElementById('new-post-title');
 var signInButton = document.getElementById('sign-in-button');
 var signOutButton = document.getElementById('sign-out-button');
 var splashPage = document.getElementById('page-splash');
 var addPost = document.getElementById('add-post');
-var addButton = document.getElementById('add');
 var recentPostsSection = document.getElementById('recent-posts-list');
 var userPostsSection = document.getElementById('user-posts-list');
 var topUserPostsSection = document.getElementById('top-user-posts-list');
-var recentMenuButton = document.getElementById('menu-recent');
-var myPostsMenuButton = document.getElementById('menu-my-posts');
-var myTopPostsMenuButton = document.getElementById('menu-my-top-posts');
+var potentialMatchesButton = document.getElementById('potential-matches');
+var myMatchesButton = document.getElementById('my-matches');
+var profileButton = document.getElementById('profile');
 var listeningFirebaseRefs = [];
 
 // /**
@@ -386,9 +383,9 @@ function showSection(sectionElement, buttonElement) {
   userPostsSection.style.display = 'none';
   topUserPostsSection.style.display = 'none';
   addPost.style.display = 'none';
-  recentMenuButton.classList.remove('is-active');
-  myPostsMenuButton.classList.remove('is-active');
-  myTopPostsMenuButton.classList.remove('is-active');
+  potentialMatchesButton.classList.remove('is-active');
+  myMatchesButton.classList.remove('is-active');
+  profileButton.classList.remove('is-active');
 
   if (sectionElement) {
     sectionElement.style.display = 'block';
@@ -421,7 +418,7 @@ window.addEventListener('load', function() {
     var title = titleInput.value;
     if (text && title) {
       newPostForCurrentUser(title, text).then(function() {
-        myPostsMenuButton.click();
+        myMatchesButton.click();
       });
       messageInput.value = '';
       titleInput.value = '';
@@ -429,19 +426,17 @@ window.addEventListener('load', function() {
   };
 
   // Bind menu buttons.
-  recentMenuButton.onclick = function() {
-    showSection(recentPostsSection, recentMenuButton);
+  potentialMatchesButton.onclick = function() {
+    console.log('button1')
+    showSection(recentPostsSection, potentialMatchesButton);
   };
-  myPostsMenuButton.onclick = function() {
-    showSection(userPostsSection, myPostsMenuButton);
+  myMatchesButton.onclick = function() {
+    console.log('button2')
+    showSection(userPostsSection, myMatchesButton);
   };
-  myTopPostsMenuButton.onclick = function() {
-    showSection(topUserPostsSection, myTopPostsMenuButton);
+  profileButton.onclick = function() {
+    console.log('button3')
+    showSection(topUserPostsSection, profileButton);
   };
-  addButton.onclick = function() {
-    showSection(addPost);
-    messageInput.value = '';
-    titleInput.value = '';
-  };
-  recentMenuButton.onclick();
+  potentialMatchesButton.onclick();
 }, false);
